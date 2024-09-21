@@ -1,0 +1,20 @@
+Here are some useful IntelliJ IDEA shortcuts for Mac to help with navigation:
+
+https://www.jetbrains.com/help/idea/mastering-keyboard-shortcuts.html
+
+1. **Quickly locate a file by name**:
+   - Press `Command (⌘) + Shift + O` to open the "Search Everywhere" dialog and start typing the file name.
+
+2. **Go to the definition of a method from where it is used**:
+   - Place the cursor on the method and press `Command (⌘) + Click` to navigate to its definition.
+
+3. **Go back to the previous location**:
+   - Press `Command (⌘) + Option (⌥) + Left Arrow` to return to the previous location.
+
+4. **View the documentation of a method without navigating to it**:
+   - Place the cursor on the method and press `F1` or `Control (⌃) + J` to open the quick documentation pop-up.
+
+5. **Find where a method/field is being used**:
+   - Place the cursor on the method/field and press `Command (⌘) + Shift + F7` or `Command (⌘) + Option (⌥) + F7` to find usages.
+
+These shortcuts should help you navigate and work efficiently in IntelliJ IDEA on macOS.
