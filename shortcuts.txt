@@ -15,6 +15,6 @@ https://www.jetbrains.com/help/idea/mastering-keyboard-shortcuts.html
    - Place the cursor on the method and press `F1` or `Control (⌃) + J` to open the quick documentation pop-up.
 
 5. **Find where a method/field is being used**:
-   - Place the cursor on the method/field and press `Command (⌘) + Shift + F7` or `Command (⌘) + Option (⌥) + F7` to find usages.
+   - Place the cursor on the method/field and press ⌥ (Option) + F7  or `Command (⌘) + Option (⌥) + F7` to find usages.
 
 These shortcuts should help you navigate and work efficiently in IntelliJ IDEA on macOS.
