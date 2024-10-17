@@ -23,7 +23,7 @@
                 <URL value="@DarkTheme.css"/>
                 <URL value="@Extensions.css"/>
             </stylesheets>
-            <VBox>
+            <VBox VBox.vgrow="ALWAYS">
                 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
                     <Menu mnemonicParsing="false" text="File">
                         <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
@@ -33,7 +33,7 @@
                     </Menu>
                 </MenuBar>
                 <HBox>
-                    <VBox>
+                    <VBox VBox.vgrow="ALWAYS">
                         <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
                             <padding>
                                 <Insets bottom="5" left="10" right="10" top="5"/>
@@ -52,10 +52,10 @@
                             <padding>
                                 <Insets bottom="10" left="10" right="0" top="10"/>
                             </padding>
-                            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
                         </VBox>
                     </VBox>
-                    <VBox minWidth="250" prefWidth="250" styleClass="pane-with-border">
+                    <VBox minWidth="250" prefWidth="250" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
                         <padding>
                             <Insets bottom="10" left="10" right="10" top="10"/>
                         </padding>
