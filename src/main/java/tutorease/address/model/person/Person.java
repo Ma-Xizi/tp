@@ -108,6 +108,8 @@ public abstract class Person {
         return Objects.hash(name, phone, email, address, tags);
     }
 
+    abstract PersonList getRelated();
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
