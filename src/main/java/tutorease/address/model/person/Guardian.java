@@ -1,10 +1,11 @@
 package tutorease.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Set;
 
 import tutorease.address.model.tag.Tag;
 
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Guardian in the address book.
@@ -49,7 +50,7 @@ public class Guardian extends Person {
      * @param student The student to oversee.
      * @throws NullPointerException if the provided student is null.
      */
-    public void overseeStudent(Student student) {
+    public void addStudent(Student student) {
         requireNonNull(student, "Student cannot be null");
         if (!this.students.containPerson(student)) {
             this.students.addPerson(student);
