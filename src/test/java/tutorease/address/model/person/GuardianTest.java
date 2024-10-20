@@ -16,6 +16,8 @@ import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_SUPPORT
 import static tutorease.address.testutil.Assert.assertThrows;
 import static tutorease.address.testutil.TypicalGuardians.CHICK;
 import static tutorease.address.testutil.TypicalGuardians.MEG;
+import static tutorease.address.testutil.TypicalStudents.ALICE;
+import static tutorease.address.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -93,6 +95,37 @@ public class GuardianTest {
         editedMeg = new GuardianBuilder(MEG).withTags(VALID_TAG_MENTOR).build();
         assertFalse(MEG.equals(editedMeg));
     }
+
+    @Test
+    public void getRole_returnsCorrectRole() {
+        assertEquals(new Role(Role.GUARDIAN), MEG.getRole());
+    }
+
+    @Test
+    public void getRelated_initiallyEmpty() {
+        // Test that the list of related students is empty upon initialization
+        assertTrue(MEG.getRelated().getPersons().isEmpty());
+    }
+
+    @Test
+    public void addStudent_duplicateStudent_notAddedTwice() {
+        // Test that the same student cannot be added twice
+        MEG.addStudent(ALICE);
+        MEG.addStudent(ALICE); // Attempt to add the same student again
+        assertEquals(1, MEG.getRelated().getPersons().size()); // Ensure only one instance exists
+    }
+
+    @Test
+    public void addMultipleStudents_successfullyAddsAll() {
+        // Test that multiple distinct students can be added
+        MEG.addStudent(ALICE);
+        MEG.addStudent(BOB);
+        assertEquals(2, MEG.getRelated().getPersons().size());
+        assertTrue(MEG.getRelated().containPerson(ALICE));
+        assertTrue(MEG.getRelated().containPerson(ALICE));
+    }
+
+
 
     @Test
     public void toStringMethod() {
