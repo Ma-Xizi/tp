@@ -1,5 +1,7 @@
 package tutorease.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +18,19 @@ public class PersonList<T extends Person> {
 
     public PersonList() {
         this.persons = new ArrayList<>(); // Initialize the ArrayList
+    }
+
+    /**
+     * Constructs a new PersonList using an existing list of people.
+     *
+     * @param existingPeople The list of people to initialize the PersonList with.
+     *                       Must not be null.
+     * @throws NullPointerException if the provided list is null.
+     */
+    public PersonList(ArrayList<T> existingPeople) {
+        requireNonNull(existingPeople, "The list of existing people cannot be null");
+        this.persons = new ArrayList<>(existingPeople);
+
     }
 
     /**
@@ -56,4 +71,17 @@ public class PersonList<T extends Person> {
     public List<T> getPersons() {
         return Collections.unmodifiableList(persons);
     }
+
+    /**
+     * Checks if the specified person exists in the list of persons.
+     *
+     * @param person The person to check for existence.
+     * @return {@code true} if the person exists in the list, {@code false} otherwise.
+     * @throws NullPointerException if the provided person is null.
+     */
+    boolean containPerson(Person person) {
+        requireNonNull(person, "Person cannot be null");
+        return persons.contains(person);
+    }
+
 }

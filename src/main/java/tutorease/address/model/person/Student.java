@@ -1,5 +1,6 @@
 package tutorease.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static tutorease.address.model.person.Role.STUDENT;
 
 import java.util.Set;
@@ -35,7 +36,17 @@ public class Student extends Person {
         return this.guardians;
     }
 
+    /**
+     * Adds a guardian to the list of guardians if it does not already exist.
+     *
+     * @param guardian The guardian to add.
+     * @throws NullPointerException if the provided guardian is null.
+     */
     public void addGuardian(Guardian guardian) {
-        this.guardians.addPerson(guardian);
+        requireNonNull(guardian, "Guardian cannot be null");
+
+        if (!this.guardians.containPerson(guardian)) {
+            this.guardians.addPerson(guardian);
+        }
     }
 }

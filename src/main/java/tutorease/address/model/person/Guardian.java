@@ -3,6 +3,9 @@ package tutorease.address.model.person;
 import java.util.Set;
 
 import tutorease.address.model.tag.Tag;
+
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a Guardian in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -31,10 +34,25 @@ public class Guardian extends Person {
         return new Role(Role.GUARDIAN);
     }
 
+    /**
+     * Returns the list of related students.
+     *
+     * @return an unmodifiable list of students related to the guardian.
+     */
     public PersonList<Person> getRelated() {
         return this.students;
     }
+
+    /**
+     * Adds a student to the list of students being overseen by the guardian.
+     *
+     * @param student The student to oversee.
+     * @throws NullPointerException if the provided student is null.
+     */
     public void overseeStudent(Student student) {
-        this.students.addPerson(student);
+        requireNonNull(student, "Student cannot be null");
+        if (!this.students.containPerson(student)) {
+            this.students.addPerson(student);
+        }
     }
 }
