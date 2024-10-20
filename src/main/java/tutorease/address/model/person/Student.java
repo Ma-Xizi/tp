@@ -40,6 +40,32 @@ public class Student extends Person {
 
     }
 
+    /**
+     * Every field must be present and not null.
+     *
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param role
+     * @param tags
+     * @param zoomLink
+     * @param subjects
+     * @param gradeLevel
+     * @param fees
+     * @param examDetails
+     */
+    public Student(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags,
+                   String zoomLink, Set<String> subjects, String gradeLevel, double fees, String examDetails) {
+        super(name, phone, email, address, role, tags);
+        this.guardians = new PersonList<>();
+        this.zoomLink = zoomLink;
+        this.subjects = new HashSet<>(subjects);
+        this.gradeLevel = gradeLevel;
+        this.fees = fees;
+        this.examDetails = examDetails;
+    }
+
     public Role getRole() {
         return new Role(STUDENT);
     }
@@ -84,5 +110,23 @@ public class Student extends Person {
 
     public String getExamDetails() {
         return examDetails;
+    }
+
+    /**
+     * Edits the details of the student.
+     *
+     * @param newAddress New address of the student.
+     * @param newFees New tuition fees.
+     * @param newExamDetails New exam details.
+     * @param newSubjects New set of subjects for the student.
+     * @throws NullPointerException if any of the parameters are null.
+     */
+    public Student editDetails(Address newAddress, double newFees, String newExamDetails, Set<String> newSubjects) {
+        requireNonNull(newAddress, "Address cannot be null");
+        requireNonNull(newExamDetails, "Exam details cannot be null");
+        requireNonNull(newSubjects, "Subjects cannot be null");
+
+        return new Student(getName(), getPhone(), getEmail(), newAddress, getRole(), getTags(),
+                getZoomLink(), newSubjects, gradeLevel, newFees, newExamDetails);
     }
 }
