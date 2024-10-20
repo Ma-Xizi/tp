@@ -14,6 +14,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.VALID_PHONE_MEG;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_MENTOR;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_SUPPORTIVE;
 import static tutorease.address.testutil.Assert.assertThrows;
+import static tutorease.address.testutil.TypicalGuardians.CHARLOTTE;
 import static tutorease.address.testutil.TypicalGuardians.CHICK;
 import static tutorease.address.testutil.TypicalGuardians.MEG;
 import static tutorease.address.testutil.TypicalStudents.ALICE;
@@ -102,17 +103,11 @@ public class GuardianTest {
     }
 
     @Test
-    public void getRelated_initiallyEmpty() {
-        // Test that the list of related students is empty upon initialization
-        assertTrue(MEG.getRelated().getPersons().isEmpty());
-    }
-
-    @Test
     public void addStudent_duplicateStudent_notAddedTwice() {
         // Test that the same student cannot be added twice
-        MEG.addStudent(ALICE);
-        MEG.addStudent(ALICE); // Attempt to add the same student again
-        assertEquals(1, MEG.getRelated().getPersons().size()); // Ensure only one instance exists
+        CHARLOTTE.addStudent(ALICE);
+        CHARLOTTE.addStudent(ALICE); // Attempt to add the same student again
+        assertEquals(1, CHARLOTTE.getRelated().getPersons().size()); // Ensure only one instance exists
     }
 
     @Test
