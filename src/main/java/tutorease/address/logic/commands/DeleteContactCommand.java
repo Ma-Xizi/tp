@@ -5,9 +5,13 @@ import static tutorease.address.logic.Messages.format;
 
 import java.util.List;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
+import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 
 
@@ -52,10 +56,19 @@ public class DeleteContactCommand extends ContactCommand {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        deleteLessonsForStudent(model, personToDelete);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, format(personToDelete)));
+    }
+
+    // Helper method to delete lessons for a specific student
+    private void deleteLessonsForStudent(Model model, Person student) {
+        ObservableList<Lesson> lessons = model.getFilteredLessonList();
+        lessons.stream()
+                .filter(lesson -> lesson.getStudent().equals(student))
+                .forEach(model::deleteLesson);
     }
 
     @Override
