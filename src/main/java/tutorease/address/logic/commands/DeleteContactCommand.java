@@ -56,20 +56,11 @@ public class DeleteContactCommand extends ContactCommand {
         }
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        deleteLessonsForStudent(model, personToDelete);
+        model.deleteStudentLesson(personToDelete);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, format(personToDelete)));
     }
 
-    private void deleteLessonsForStudent(Model model, Person student) {
-        // Collect lessons associated with the student
-        List<Lesson> lessonsToDelete = model.getFilteredLessonList().stream()
-                .filter(lesson -> lesson.getStudent().equals(student))
-                .collect(Collectors.toList());
-
-        // Remove lessons after gathering them to avoid ConcurrentModificationException
-        lessonsToDelete.forEach(model::deleteLesson);
-    }
 
     @Override
     public boolean equals(Object other) {
