@@ -4,12 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static tutorease.address.logic.Messages.format;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
-import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 
 
