@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.exceptions.LessonIndexOutOfRange;
+import tutorease.address.model.lesson.exceptions.LessonNotInList;
 import tutorease.address.model.lesson.exceptions.OverlappingLessonException;
 import tutorease.address.testutil.LessonBuilder;
 
@@ -39,7 +40,7 @@ public class UniqueLessonListTest {
     @AfterEach
     public void tearDown() {
         while (uniqueLessonList.size() > 0) {
-            uniqueLessonList.remove(0);
+            uniqueLessonList.remove(lesson);
         }
     }
 
@@ -99,7 +100,7 @@ public class UniqueLessonListTest {
         assertTrue(uniqueLessonList.contains(lesson));
 
         // Remove the first lesson and verify it's removed
-        uniqueLessonList.remove(0);
+        uniqueLessonList.remove(lesson);
         assertEquals(0, uniqueLessonList.size());
         assertFalse(uniqueLessonList.contains(lesson));
     }
@@ -108,8 +109,13 @@ public class UniqueLessonListTest {
     public void remove_invalidIndex_throwsLessonIndexOutOfRange() {
         assertTrue(uniqueLessonList.contains(lesson));
 
-        // Verify that removing a lesson with an invalid index throws the exception
-        assertThrows(LessonIndexOutOfRange.class, () -> uniqueLessonList.remove(5));
+        Lesson lesson = uniqueLessonList.get(0);
+        uniqueLessonList.remove(lesson);
+        assertEquals(0, uniqueLessonList.size());
+        assertFalse(uniqueLessonList.contains(lesson));
+
+        // Verify that removing a lesson that is not in the list throws the exception
+        assertThrows(LessonNotInList.class, () -> uniqueLessonList.remove(lesson));
     }
 
     @Test

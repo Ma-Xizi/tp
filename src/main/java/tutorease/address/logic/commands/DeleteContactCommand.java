@@ -60,7 +60,7 @@ public class DeleteContactCommand extends ContactCommand {
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, format(personToDelete)));
     }
-    
+
     private void deleteLessonsForStudent(Model model, Person student) {
         // Collect lessons associated with the student
         List<Lesson> lessonsToDelete = model.getFilteredLessonList().stream()

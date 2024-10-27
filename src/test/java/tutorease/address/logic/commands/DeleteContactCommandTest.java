@@ -1,5 +1,6 @@
 package tutorease.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -106,6 +107,9 @@ class DeleteContactCommandTest {
 
 
     private class ModelStub implements Model {
+        final ArrayList<Lesson> lessonsAdded = new ArrayList<>();
+        final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -187,7 +191,7 @@ class DeleteContactCommandTest {
 
         @Override
         public ObservableList<Lesson> getFilteredLessonList() {
-            throw new AssertionError("This method should not be called.");
+            return lessons;
         }
 
         @Override
@@ -197,17 +201,19 @@ class DeleteContactCommandTest {
 
         @Override
         public void addLesson(Lesson lesson) {
-            throw new AssertionError("This method should not be called.");
+            requireNonNull(lesson);
+            lessonsAdded.add(lesson);
+            lessons.add(lesson);
         }
-
         @Override
         public boolean hasLessons(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteLesson(int index) {
-            throw new AssertionError("This method should not be called.");
+        public void deleteLesson(Lesson lesson) {
+            requireNonNull(lesson);
+            lessonsAdded.remove(lesson);
         }
 
         @Override
