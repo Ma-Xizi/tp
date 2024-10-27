@@ -4,12 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static tutorease.address.logic.Messages.format;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
-import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
@@ -62,13 +60,15 @@ public class DeleteContactCommand extends ContactCommand {
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, format(personToDelete)));
     }
-
-    // Helper method to delete lessons for a specific student
+    
     private void deleteLessonsForStudent(Model model, Person student) {
-        ObservableList<Lesson> lessons = model.getFilteredLessonList();
-        lessons.stream()
+        // Collect lessons associated with the student
+        List<Lesson> lessonsToDelete = model.getFilteredLessonList().stream()
                 .filter(lesson -> lesson.getStudent().equals(student))
-                .forEach(model::deleteLesson);
+                .collect(Collectors.toList());
+
+        // Remove lessons after gathering them to avoid ConcurrentModificationException
+        lessonsToDelete.forEach(model::deleteLesson);
     }
 
     @Override

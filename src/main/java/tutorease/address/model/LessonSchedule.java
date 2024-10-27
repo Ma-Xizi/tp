@@ -1,5 +1,7 @@
 package tutorease.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -57,12 +59,13 @@ public class LessonSchedule implements ReadOnlyLessonSchedule {
     }
 
     /**
-     * Deletes the lesson at the specified index from the lesson list.
+     * Deletes the specified lesson from the lesson list.
      *
-     * @param index The index of the lesson to be removed. Must be a valid index.
+     * @param lesson The lesson to be removed. Must exist in the lesson list.
      */
-    public void deleteLesson(int index) {
-        lessons.remove(index);
+    public void deleteLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        lessons.remove(lesson);
     }
 
     /**
