@@ -218,17 +218,25 @@ class DeleteContactCommandTest {
 
         @Override
         public Lesson getLesson(int index) {
-            throw new AssertionError("This method should not be called.");
+            return lessonsAdded.get(index);
         }
 
         @Override
         public int getLessonScheduleSize() {
-            throw new AssertionError("This method should not be called.");
+            return lessonsAdded.size();
         }
 
         @Override
         public void deleteStudentLesson(Person student) {
-            throw new AssertionError("This method should not be called.");
+            int currentIndex = 0;
+            while (currentIndex < this.getLessonScheduleSize()) {
+                Lesson lesson = this.getLesson(currentIndex);
+                if (student.equals(lesson.getStudent())) {
+                    this.deleteLesson(lesson);
+                } else {
+                    currentIndex++;
+                }
+            }
         }
     }
 
